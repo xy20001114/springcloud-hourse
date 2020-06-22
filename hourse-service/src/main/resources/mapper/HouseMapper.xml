@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xueyong.hourseservice.mapper.HouseMapper">
+    <select id="getPageInfo" resultType="hourseVo">
+        SELECT t.* from t_house t left join t_district s on t.county=s.id
+        <where>
+            <if test="hourseVo.county!=null and hourseVo.county!=0">
+                t.county= #{hourseVo.county}
+            </if>
+            <if test=" hourseVo.zujinid==1">
+                t.rent >= 600 and 1000>= t.rent
+            </if>
+            <if test=" hourseVo.zujinid==2">
+                t.rent >= 1000 and 1500>= t.rent
+            </if>
+            <if test=" hourseVo.zujinid==3">
+                t.rent >= 1500 and 2000>= t.rent
+            </if>
+            <if test=" hourseVo.zujinid==4">
+                t.rent >= 2000 and 3000>= t.rent
+            </if>
+            <if test=" hourseVo.zujinid==5">
+                t.rent >= 3000 and 5000>= t.rent
+            </if>
+            <if test=" hourseVo.zujinid==6">
+                t.rent >= 5000 and 8000>= t.rent
+            </if>
+            <if test="hourseVo.room!=null and hourseVo.room!=0">
+                t.room = #{hourseVo.room}
+            </if>
+        </where>
+    </select>
+</mapper>
